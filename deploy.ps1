@@ -24,7 +24,7 @@ gcloud run deploy $SERVICE_NAME `
   --platform managed `
   --region $REGION `
   --allow-unauthenticated `
-  --memory 512Mi `
+  --memory 1Gi `
   --cpu 1 `
   --max-instances 1 `
   --min-instances 0 `
