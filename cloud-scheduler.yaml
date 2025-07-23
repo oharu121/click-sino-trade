@@ -1,0 +1,22 @@
+# Cloud Scheduler configuration for cost optimization
+# This triggers the service only when needed instead of keeping it running 24/7
+
+apiVersion: cloudscheduler.googleapis.com/v1
+kind: Job
+metadata:
+  name: sino-trade-trigger
+spec:
+  schedule: "0 * * * *" # Every hour
+  timeZone: "Asia/Taipei"
+  httpTarget:
+    uri: "YOUR_CLOUD_RUN_URL" # Replace with your Cloud Run service URL
+    httpMethod: POST
+    headers:
+      Content-Type: "application/json"
+    body: "{}"
+  retryConfig:
+    retryCount: 3
+    maxRetryDuration: "300s"
+    minBackoffDuration: "5s"
+    maxBackoffDuration: "60s"
+    maxDoublings: 5
